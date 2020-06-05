@@ -1,0 +1,159 @@
+@primary-color: #0084FF; // 全局主色
+@hover-color: #299FFF; // hover颜色
+@error-color: #FD7474; // 错误色
+@active-error-color: #d9363e;
+@success-color: #33C172; // 成功色
+@blur-color: #959DAB; // 失去焦点的颜色
+
+.btn.primary {
+  border-color: @primary-color;
+  background-color: @primary-color;
+  color: #fff;
+}
+
+.btn.primary:active,
+.btn.loading.primary {
+  border-color: @hover-color;
+  background-color: @hover-color;
+  color: #fff;
+}
+
+.btn.primary.ghost {
+  color: @primary-color;
+}
+
+.btn.primary.ghost:active {
+  color: @hover-color;
+}
+
+.btn.danger {
+  border-color: @error-color;
+  background-color: @error-color;
+  color: #fff;
+}
+
+.btn.danger.ghost {
+  color: @error-color;
+}
+
+.btn.danger:active,
+.btn.loading.danger {
+  border-color: @active-error-color;
+  background-color: @active-error-color;
+  color: #fff;
+}
+
+.btn.danger.ghost:active {
+  color: @active-error-color;
+}
+
+.btn.dashed {
+  border-style: dashed;
+}
+
+.btn.link {
+  border-width: 0;
+  color: @primary-color;
+}
+
+.btn.link:active {
+  color: @hover-color;
+}
+
+.btn.primary.ghost,
+.btn.primary.ghost:active,
+.btn.danger.ghost,
+.btn.danger.ghost:active {
+  background-color: #fff;
+}
+
+.btn {
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  background-image: none;
+  cursor: pointer;
+  transition: all .3s cubic-bezier(.645, .045, .355, 1);
+  height: 32px;
+  padding: 0 15px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, .65);
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+}
+
+.btn.loading {
+  pointer-events: none;
+}
+
+#btn.disabled,
+#btn.disabled:active {
+  color: rgba(0, 0, 0, .25);
+  background-color: #f5f5f5;
+  border-color: #d9d9d9;
+}
+
+#btn.disabled:hover {
+  cursor: not-allowed;
+}
+
+.block {
+  width: 100%;
+}
+
+.btn:active {
+  border-color: @hover-color;
+  color: @hover-color;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn.circle {
+  min-width: 32px;
+  border-radius: 50%;
+  padding: 0;
+}
+
+.btn.round {
+  padding: 0 16px;
+  border-radius: 32px;
+}
+
+.btn.large {
+  height: 40px;
+  font-size: 16px;
+}
+
+.btn.small {
+  height: 24px;
+  padding: 0 7px;
+}
+
+.btn.small.circle {
+  min-width: 24px;
+}
+
+.btn.large.circle {
+  min-width: 40px;
+}
+
+.btn.small.round {
+  padding: 0 12px;
+  border-radius: 24px;
+}
+
+.btn.large.round {
+  padding: 0 20px;
+  border-radius: 40px;
+}
+
+.icon-content {
+  vertical-align: middle;
+  margin-right: 5px;
+}
