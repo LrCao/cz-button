@@ -8,6 +8,10 @@
       "node_modules/**"
     ]
   },
+  "semicolon": [
+    false,
+    "always"
+  ],
   "rules": {
     "indent": [true, "spaces", 2],
     "interface-name": false,

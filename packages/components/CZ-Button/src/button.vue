@@ -96,6 +96,7 @@ export default defineComponent({
     )
 
     const handleClick = () => {
+      if (props.disabled) return
       ctx.emit('click')
     }
 

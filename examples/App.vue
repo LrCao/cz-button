@@ -30,94 +30,98 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "@vue/composition-api"
+import { defineComponent, reactive, toRefs } from '@vue/composition-api';
 
 interface BtnType {
-  value: string | boolean,
-  name: string,
-  type: string
+  value: string | boolean;
+  name: string;
+  type: string;
 }
 
-const btnType: Array<BtnType> = [
+interface BtnArray {
+  [index: number]: BtnType;
+}
+
+const btnType: BtnArray = [
   {
     value: 'large',
     name: '大号',
-    type: 'size'
+    type: 'size',
   },
   {
     value: 'default',
     name: '中号',
-    type: 'size'
+    type: 'size',
   },
   {
     value: 'small',
     name: '小号',
-    type: 'size'
+    type: 'size',
   },
   {
     value: 'primary',
     name: '主要按钮',
-    type: 'type'
+    type: 'type',
   },
   {
     value: 'danger',
     name: '危险按钮',
-    type: 'type'
+    type: 'type',
   },
   {
     value: 'dashed',
     name: '次要按钮',
-    type: 'type'
+    type: 'type',
   },
   {
     value: 'link',
     name: '文字按钮',
-    type: 'type'
+    type: 'type',
   },
   {
     value: 'default',
     name: '默认样式',
-    type: 'type'
+    type: 'type',
   },
   {
     value: 'circle',
     name: '圆按钮',
-    type: 'shape'
+    type: 'shape',
   },
   {
     value: 'round',
     name: '半圆按钮',
-    type: 'shape'
+    type: 'shape',
   },
   {
     value: '',
     name: '默认形状',
-    type: 'shape'
+    type: 'shape',
   },
   {
     value: false,
     name: 'disabled',
-    type: 'disabled'
+    type: 'disabled',
   },
   {
     value: false,
     name: '幽灵按钮',
-    type: 'ghost'
+    type: 'ghost',
   },
   {
     value: false,
     name: 'block按钮',
-    type: 'block'
+    type: 'block',
   },
   {
     value: false,
     name: '加载中',
-    type: 'loading'
+    type: 'loading',
   },
-]
+];
 
 export default defineComponent({
-  setup () {
+  setup() {
     const state = reactive({
       btnType,
       icon: '',
@@ -129,36 +133,37 @@ export default defineComponent({
       type: 'default',
       size: 'default',
       iconName: '',
-      name: '默认名称'
-    })
+      name: '默认名称',
+    });
 
-    const handlerClick = (value:boolean|string, type:string, name:string):void => { 
-      state.name = name
+    const handlerClick = (value: boolean|string, type: string, name: string): void => {
+      state.name = name;
       interface IState {
-        [key: string]: any
+        [key: string]: any;
       }
-      if (typeof value === 'boolean') 
-        (<IState>state)[type] = !(<IState>state)[type]
-      else
-        (<IState>state)[type] = value
-    }
+      if (typeof value === 'boolean') {
+        (state as IState)[type] = !(state as IState)[type];
+      } else {
+        (state as IState)[type] = value;
+      }
+    };
 
     const conClick = () => {
-      console.log(state)
-    }
+      window.console.log(state);
+    };
 
     const clickIcon = () => {
-      state.icon = state.iconName
-    }
+      state.icon = state.iconName;
+    };
 
     return {
       ...toRefs(state),
       handlerClick,
       conClick,
-      clickIcon
-    }
-  }
-})
+      clickIcon,
+    };
+  },
+});
 </script>
 
 <style lang="less">
