@@ -6,14 +6,14 @@
           说明：参考antd,(icon可在antd中查询使用)
         </a-col>
         <a-col :span="6" class="col" v-for="(b,index) in btnType" :key="index">
-          <CZ-Button @click="handlerClick(b.value, b.type, b.name)" type="primary">{{b.name}}</CZ-Button>
+          <Cz-Button @click="handlerClick(b.value, b.type, b.name)" type="primary">{{b.name}}</Cz-Button>
         </a-col>
         <a-col class="col" :span="24">
           <a-input v-model="iconName" style="margin-right:25px;width: 250px;" />
-          <CZ-Button @click="clickIcon" type="primary">添加图标</CZ-Button>
+          <Cz-Button @click="clickIcon" type="primary">添加图标</Cz-Button>
         </a-col>
         <a-col class="col" :span="24">
-          <CZ-Button @click="conClick" 
+          <Cz-Button @click="conClick" 
             :icon="icon" 
             :block="block" 
             :ghost="ghost" 
@@ -21,7 +21,7 @@
             :size="size"
             :disabled="disabled" 
             :loading="loading" 
-            :type="type">{{name}}</CZ-Button>
+            :type="type">{{name}}</Cz-Button>
         </a-col>
       </a-row>
       <!-- <a @click="handlerClick">这是一个A标签</a> -->
@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@vue/composition-api';
+import { Vue, Component } from 'vue-property-decorator'
 
 interface BtnType {
   value: string | boolean;
@@ -118,52 +118,43 @@ const btnType: BtnArray = [
     name: '加载中',
     type: 'loading',
   },
-];
+]
 
-export default defineComponent({
-  setup() {
-    const state = reactive({
-      btnType,
-      icon: '',
-      block: false,
-      ghost: false,
-      shape: '',
-      disabled: false,
-      loading: false,
-      type: 'default',
-      size: 'default',
-      iconName: '',
-      name: '默认名称',
-    });
+@Component
+export default class App extends Vue {
+  private btnType: BtnArray = btnType
+  private icon: string = ''
+  private shape: string = ''
+  private type: string = 'primary'
+  private size: string = 'default'
+  private iconName: string = ''
+  private name: string = '默认名称'
+  private block: boolean = false
+  private ghost: boolean = false
+  private disabled: boolean = false
+  private loading: boolean = false
 
-    const handlerClick = (value: boolean|string, type: string, name: string): void => {
-      state.name = name;
-      interface IState {
-        [key: string]: any;
-      }
-      if (typeof value === 'boolean') {
-        (state as IState)[type] = !(state as IState)[type];
-      } else {
-        (state as IState)[type] = value;
-      }
-    };
+  handlerClick (value: boolean|string, type: string, name: string): void {
+    this.name = name
+    console.log(this.name)
+    interface IState {
+      [key: string]: any
+    }
+    if (typeof value === 'boolean') {
+      (this as IState)[type] = !(this as IState)[type]
+    } else {
+      (this as IState)[type] = value
+    }
+  }
 
-    const conClick = () => {
-      window.console.log(state);
-    };
+  conClick () {
+    window.console.log('zheshigeanniu')
+  }
 
-    const clickIcon = () => {
-      state.icon = state.iconName;
-    };
-
-    return {
-      ...toRefs(state),
-      handlerClick,
-      conClick,
-      clickIcon,
-    };
-  },
-});
+  clickIcon () {
+    this.icon = this.iconName
+  }
+}
 </script>
 
 <style lang="less">

@@ -10,103 +10,58 @@
   </button>
 </template>
 <script lang="ts">
-import {
-  reactive,
-  toRefs,
-  defineComponent,
-  watch,
-} from "@vue/composition-api";
+import { Vue, Component, Watch, Emit, Prop } from 'vue-property-decorator'
 
-
-export default defineComponent({
-  name: "CZ-Button",
-
-  props: {
-    disabled: { //按钮失效状态
-      type: Boolean,
-      default: false
-    },
-    ghost: { // 按钮背景透明
-      type: Boolean,
-      default: false,
-    },
-    icon: { // 按钮图标类型
-      type: String
-    },
-    loading: { // 设置按钮载入状态
-      type: [Boolean, Object],
-      default: false
-    },
-    block: {
-      type: Boolean,
-      default: false
-    },
-    shape: { // 设置按钮形状
-      type: String,
-      default: '',
-      validator (value) {
-        return ['circle', 'round ', '']
-      }
-    },
-    size: { // 设置按钮大小
-      type: String,
-      default: 'default',
-      validator (value) {
-        return ['large', 'small', 'default']
-      }
-    },
-    type: { // 设置按钮类型
-      type: String,
-      default: 'default',
-      validator (value) {
-        return ['primary', 'dashed', 'danger', 'link', 'default']
-      }
-    }
-  },
-
-  setup (props, ctx) {
-
-    const state = reactive({
-      reDisabled: !!props.disabled,
-      isIcon: !!props.icon,
-      icons: props.icon,
-    })
-
-    watch(
-      () => [props.loading, props.icon],
-
-      ([loading, icon]) => {
-        if (loading) {
-          let delay = typeof loading === 'boolean' ? 0 : loading.delay
-          setTimeout(() => {
-            state.icons = 'loading'
-            state.reDisabled = true
-            state.isIcon = true
-          }, delay)
-        } else {
-          state.isIcon = !!props.icon
-          state.icons = props.icon
-          state.reDisabled = !!props.disabled
-        }
-        if (icon && !props.loading) {
-          state.isIcon = !!props.icon
-          state.icons = props.icon
-        }
-      }
-    )
-
-    const handleClick = () => {
-      if (props.disabled) return
-      ctx.emit('click')
-    }
-
-    return {
-      ...toRefs(state),
-      handleClick
-    }
-    
-  }
+@Component({
 })
+export default class CzButton extends Vue {
+  name: string = 'test-button'
+
+  @Prop({ default: false }) private disabled!: boolean
+  @Prop({ default: false }) private ghost!: boolean
+  @Prop() private icon!: string
+  @Prop({ default: false }) private loading!: boolean | object
+  @Prop({ default: false }) private block!: boolean
+  @Prop({ default: '', validator(value: any):string[] { return ['circle', 'round', ''] }}) private shape!: string
+  @Prop({ default: 'default', validator(value: any):string[] { return ['large', 'small', 'default'] }}) private size!: string
+  @Prop({ default: 'default', validator(value: any):string[] { return ['primary', 'dashed', 'danger', 'link', 'default'] }}) private type!: string
+
+  reDisabled: boolean = !!this.disabled
+  isIcon:boolean = !!this.icon
+  icons:string = this.icon
+  
+  @Watch('loading', { immediate: true, deep: true })
+  onLoadingChanged (val: boolean | object) {
+    if (val) {
+      let delay = typeof val === 'boolean' ? 0 : val.delay
+      setTimeout(() => {
+        this.icons = 'loading'
+        this.reDisabled = true
+        this.isIcon = true
+      }, delay)
+    } else {
+      this.isIcon = !!this.icon
+      this.icons = this.icon
+      this.reDisabled = !!this.disabled
+    }
+  }
+
+  @Watch('icon', {immediate: true})
+  onIconChanged (val: string) {
+    if (val && !this.loading) {
+      this.isIcon = !!this.icon
+      this.icons = this.icon
+    }
+  }
+
+  handleClick () {
+    if (this.disabled) {
+      return
+    }
+    this.$emit('click')
+  }
+
+}
 
 </script>
 <style lang="less" src="./button.less">

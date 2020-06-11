@@ -1,6 +1,5 @@
 import Vue from 'vue';
-
-import CZ_Button from './components/CZ-Button';
+import CZ_Button from './components/CZ-Button'
 
 const components = {
   CZ_Button,

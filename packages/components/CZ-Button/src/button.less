@@ -27,24 +27,24 @@
 }
 
 .btn.danger {
+  border-color: @active-error-color;
+  background-color: @active-error-color;
+  color: #fff;
+}
+
+.btn.danger:active,
+.btn.loading.danger {
   border-color: @error-color;
   background-color: @error-color;
   color: #fff;
 }
 
 .btn.danger.ghost {
-  color: @error-color;
-}
-
-.btn.danger:active,
-.btn.loading.danger {
-  border-color: @active-error-color;
-  background-color: @active-error-color;
-  color: #fff;
+  color: @active-error-color;
 }
 
 .btn.danger.ghost:active {
-  color: @active-error-color;
+  color: @error-color;
 }
 
 .btn.dashed {
