@@ -1,6 +1,6 @@
 {
   "name": "cz-button",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "基础按钮",
   "main": "lib/cz-button.umd.min.js",
   "typings": "types/index.d.ts",

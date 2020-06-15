@@ -6,14 +6,14 @@
           说明：参考antd,(icon可在antd中查询使用)
         </a-col>
         <a-col :span="6" class="col" v-for="(b,index) in btnType" :key="index">
-          <Cz-Button @click="handlerClick(b.value, b.type, b.name)" type="primary">{{b.name}}</Cz-Button>
+          <CZ-Button @click="handlerClick(b.value, b.type, b.name)" type="primary">{{b.name}}</CZ-Button>
         </a-col>
         <a-col class="col" :span="24">
           <a-input v-model="iconName" style="margin-right:25px;width: 250px;" />
-          <Cz-Button @click="clickIcon" type="primary">添加图标</Cz-Button>
+          <CZ-Button @click="clickIcon" type="primary">添加图标</CZ-Button>
         </a-col>
         <a-col class="col" :span="24">
-          <Cz-Button @click="conClick" 
+          <CZ-Button @click="conClick" 
             :icon="icon" 
             :block="block" 
             :ghost="ghost" 
@@ -21,7 +21,7 @@
             :size="size"
             :disabled="disabled" 
             :loading="loading" 
-            :type="type">{{name}}</Cz-Button>
+            :type="type">{{name}}</CZ-Button>
         </a-col>
       </a-row>
       <!-- <a @click="handlerClick">这是一个A标签</a> -->

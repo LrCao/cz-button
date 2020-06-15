@@ -13,9 +13,9 @@
 import { Vue, Component, Watch, Emit, Prop } from 'vue-property-decorator'
 
 @Component({
+  name: 'CZ-Button'
 })
 export default class CzButton extends Vue {
-  name: string = 'test-button'
 
   @Prop({ default: false }) private disabled!: boolean
   @Prop({ default: false }) private ghost!: boolean
